@@ -3,6 +3,7 @@ import javax.swing.Timer;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -88,6 +89,16 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener{
         for(int i = 0; i<snakeBody.size() ;i++){
             Tile snakePart = snakeBody.get(i);
             g.fillRect(snakePart.x *tileSize, snakePart.y * tileSize, tileSize, tileSize);
+        }
+
+        // score 
+        g.setFont(new Font("Arial", Font.BOLD, 16));
+        if (gameOver){
+            g.setColor(Color.RED);
+            g.drawString("Game OVer: " + String.valueOf(snakeBody.size()), tileSize - 16, tileSize);
+        }
+        else {
+            g.drawString("Score: "+ String.valueOf(snakeBody.size()), tileSize-16, tileSize);
         }
     }
 
