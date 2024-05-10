@@ -3,6 +3,7 @@ import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.util.Random;
 
 
 public class SnakeGame extends JPanel{
@@ -21,6 +22,8 @@ public class SnakeGame extends JPanel{
     int tileSize = 25;
 
     Tile snakeHead;
+    Tile food;
+    Random random;
 
     SnakeGame(int boardWidth, int boardHeight){
         this.boardWidth = boardWidth;
@@ -29,6 +32,9 @@ public class SnakeGame extends JPanel{
         setBackground(Color.BLACK);
 
         snakeHead = new Tile(5, 5);
+        food = new Tile(10,10);
+        random = new Random();
+        placeFood();
 
     }
 
@@ -43,8 +49,18 @@ public class SnakeGame extends JPanel{
             g.drawLine(i * tileSize, 0, i*tileSize, boardWidth); //x1,y1 , x2,y2 vertical
             g.drawLine(0, i*tileSize, boardWidth, i*tileSize); //x1,y1 x2,y2 horizontal
         }
+
+        //Food
+        g.setColor(Color.RED);
+        g.fillRect(food.x *tileSize, food.y * tileSize, tileSize, tileSize);
+
         //snake
         g.setColor(Color.GREEN);
         g.fillRect(snakeHead.x * tileSize, snakeHead.y * tileSize , tileSize, tileSize);
+    }
+
+    public void placeFood(){
+        food.x = random.nextInt(boardWidth/tileSize);
+        food.y = random.nextInt(boardWidth/tileSize);
     }
 }
